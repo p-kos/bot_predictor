@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
+from flask_cors import CORS
 
 # Load keys from .env
 load_dotenv()
@@ -14,6 +15,7 @@ api_key = os.getenv("BINANCE_API_KEY")
 api_secret = os.getenv("BINANCE_API_SECRET")
 
 app = Flask(__name__)
+CORS(app, origins=["chrome-extension://*", "localhost", "127.0.0.1"])  # Allow CORS for Chrome Extensions
 client = Client(api_key, api_secret)
 
 LOOKBACK = 60
@@ -55,6 +57,9 @@ def generate_signal(current, predicted, threshold=0.005):
 @app.route("/predict")
 def predict():
     symbol = request.args.get("symbol", default="BTCUSDT")
+    print(f"Received request for symbol: {symbol}")
+    if not symbol.endswith("USDT"):
+        return jsonify({"error": "Symbol must end with USDT"}), 400
     try:
         model, scaler, data = train_model(symbol)
 
@@ -74,12 +79,12 @@ def predict():
 
         signal = generate_signal(current_price, predicted_price)
 
-        return jsonify({
+        return {
             "symbol": symbol,
-            "current_price": round(current_price, 2),
-            "predicted_price": round(predicted_price, 2),
+            "current_price": f"{current_price}",
+            "predicted_price": f"{predicted_price}",
             "signal": signal
-        })
+        }
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

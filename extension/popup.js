@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function fetchPrediction(symbol) {
     output.innerHTML = "<p class='loading'>Loading prediction...</p>";
-    fetch(`http://localhost:5000/predict?symbol=${symbol}`)
+    fetch(`http://127.0.0.1:5000/predict?symbol=${symbol}`)
       .then((response) => response.json())
       .then((data) => {
         output.innerHTML = `
