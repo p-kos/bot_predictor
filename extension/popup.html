@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Crypto Predictor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 300px;
+      padding: 20px;
+    }
+    .signal {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .loading {
+      font-style: italic;
+    }
+    select {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Crypto Prediction</h2>
+  <select id="symbol">
+    <option value="BTCUSDT">Bitcoin (BTC)</option>
+    <option value="ETHUSDT">Ethereum (ETH)</option>
+    <option value="SOLUSDT">Solana (SOL)</option>
+    <option value="ADAUSDT">Cardano (ADA)</option>
+  </select>
+  <div id="output">
+    <p class="loading">Loading prediction...</p>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

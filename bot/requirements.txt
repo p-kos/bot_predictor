@@ -1,0 +1,16 @@
+numpy
+pandas==2.2.2
+matplotlib
+seaborn==0.13.2
+scipy
+statsmodels==0.14.4
+Flask==3.1.1
+python-binance==1.0.29
+yfinance==0.2.61
+tensorflow
+scikit-learn==1.6.1
+python-dotenv
+requests_mock 
+clyent==1.2.1 
+websockets==13.0
+protobuf==3.20.3
